@@ -29,6 +29,11 @@ class PlaneModel
     private $model;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flight", mappedBy="plane")
+     */
+    private $planes;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="manufacturer", type="string", length=64, nullable=true)
@@ -186,5 +191,61 @@ class PlaneModel
     {
         return $this->isAvailable;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->plane = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add plane
+     *
+     * @param \AppBundle\Entity\Flight $plane
+     *
+     * @return PlaneModel
+     */
+    public function addPlane(\AppBundle\Entity\Flight $plane)
+    {
+        $this->plane[] = $plane;
+
+        return $this;
+    }
+
+    /**
+     * Remove plane
+     *
+     * @param \AppBundle\Entity\Flight $plane
+     */
+    public function removePlane(\AppBundle\Entity\Flight $plane)
+    {
+        $this->plane->removeElement($plane);
+    }
+
+    /**
+     * Get plane
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlane()
+    {
+        return $this->plane;
+    }
+
+    /**
+     * Get planes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlanes()
+    {
+        return $this->planes;
+    }
+
+    public function __toString()
+    {
+        return $this->getModel();
+    }
+
+}
