@@ -2,6 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Flight;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,13 +15,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Site
 {
-    /*
-     * adding personnal methods, variables
+    /**
+     * Constructor
      */
-    public function __toString()
+    public function __construct()
     {
-        //return the Site object with "[ICAO] - [NAME] [CITY]" format, when  __toString is called.
-        return $this->icao . " - " . $this->name . " - " . $this->city;
+        $this->departures = new ArrayCollection();
+        $this->arrivals = new ArrayCollection();
     }
 
     /**
@@ -75,6 +78,11 @@ class Site
      */
     private $city;
 
+    public function __toString()
+    {
+        //return the Site object with "[ICAO] - [NAME] [CITY]" format, when  __toString is called.
+        return $this->icao . " - " . $this->name . " - " . $this->city;
+    }
 
     /**
      * Get id
@@ -205,22 +213,15 @@ class Site
     {
         return $this->city;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->departures = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add departure
      *
-     * @param \AppBundle\Entity\Flight $departure
+     * @param Flight $departure
      *
      * @return Site
      */
-    public function addDeparture(\AppBundle\Entity\Flight $departure)
+    public function addDeparture(Flight $departure)
     {
         $this->departures[] = $departure;
 
@@ -230,9 +231,9 @@ class Site
     /**
      * Remove departure
      *
-     * @param \AppBundle\Entity\Flight $departure
+     * @param Flight $departure
      */
-    public function removeDeparture(\AppBundle\Entity\Flight $departure)
+    public function removeDeparture(Flight $departure)
     {
         $this->departures->removeElement($departure);
     }
@@ -240,7 +241,7 @@ class Site
     /**
      * Get departures
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getDepartures()
     {
@@ -248,46 +249,37 @@ class Site
     }
 
     /**
-     * Add arrival
+     * Add arrivals
      *
-     * @param \AppBundle\Entity\Flight $arrival
+     * @param Flight $arrivals
      *
      * @return Site
      */
-    public function addArrival(\AppBundle\Entity\Flight $arrival)
+    public function addArrivals(Flight $arrivals)
     {
-        $this->arrival[] = $arrival;
+        $this->arrivals[] = $arrivals;
 
         return $this;
     }
 
     /**
-     * Remove arrival
+     * Remove arrivals
      *
-     * @param \AppBundle\Entity\Flight $arrival
+     * @param Flight $arrivals
      */
-    public function removeArrival(\AppBundle\Entity\Flight $arrival)
+    public function removeArrivals(Flight $arrivals)
     {
-        $this->arrival->removeElement($arrival);
+        $this->arrivals->removeElement($arrivals);
     }
 
     /**
      * Get arrival
      *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getArrival()
-    {
-        return $this->arrival;
-    }
-
-    /**
-     * Get arrivals
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getArrivals()
     {
         return $this->arrivals;
     }
+
 }

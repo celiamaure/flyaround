@@ -2,6 +2,11 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Flight;
+use AppBundle\Entity\Reservation;
+use AppBundle\Entity\Review;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,32 +17,33 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User
 {
-    /*
-     * adding personnal methods, variables
+    /**
+     * Constructor
      */
-    public function __toString()
+    public function __construct()
     {
-        //return the Site object with "[ICAO] - [NAME] [CITY]" format, when  __toString is called.
-        return $this->firstName . " " . $this->lastName;
+        $this->pilots = new ArrayCollection();
+        $this->passengers = new ArrayCollection();
+        $this->userRateds = new ArrayCollection();
     }
 
-
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Site")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $userRated;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flight", mappedBy="pilot")
      */
     private $pilots;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="userRated")
+     */
+    private $userRateds;
+
+
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="passenger")
      */
     private $passengers;
-
 
     /**
      * @var int
@@ -90,6 +96,7 @@ class User
      */
     private $note;
 
+
     /**
      * @var bool
      *
@@ -97,6 +104,10 @@ class User
      */
     private $isACertifiedPilot;
 
+    public function __toString()
+    {
+        return $this->firstName . " " . $this->lastName;
+    }
 
     /**
      * Get id
@@ -265,7 +276,6 @@ class User
 
         return $this;
     }
-
     /**
      * Get isACertifiedPilot
      *
@@ -275,158 +285,76 @@ class User
     {
         return $this->isACertifiedPilot;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->reviewAuthor = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->pilot = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add reviewAuthor
-     *
-     * @param \AppBundle\Entity\Review $reviewAuthor
-     *
-     * @return User
-     */
-    public function addReviewAuthor(\AppBundle\Entity\Review $reviewAuthor)
-    {
-        $this->reviewAuthor[] = $reviewAuthor;
-
-        return $this;
-    }
-
-    /**
-     * Remove reviewAuthor
-     *
-     * @param \AppBundle\Entity\Review $reviewAuthor
-     */
-    public function removeReviewAuthor(\AppBundle\Entity\Review $reviewAuthor)
-    {
-        $this->reviewAuthor->removeElement($reviewAuthor);
-    }
-
-    /**
-     * Get reviewAuthor
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getReviewAuthor()
-    {
-        return $this->reviewAuthor;
-    }
-
-    /**
-     * Set userRated
-     *
-     * @param \AppBundle\Entity\Site $userRated
-     *
-     * @return User
-     */
-    public function setUserRated(\AppBundle\Entity\Site $userRated)
-    {
-        $this->userRated = $userRated;
-
-        return $this;
-    }
-
-    /**
-     * Get userRated
-     *
-     * @return \AppBundle\Entity\Site
-     */
-    public function getUserRated()
-    {
-        return $this->userRated;
-    }
 
     /**
      * Add pilot
      *
-     * @param \AppBundle\Entity\Flight $pilot
+     * @param Flight $pilots
      *
      * @return User
      */
-    public function addPilot(\AppBundle\Entity\Flight $pilot)
+    public function addPilots(Flight $pilots)
     {
-        $this->pilot[] = $pilot;
+        $this->pilots[] = $pilots;
 
         return $this;
     }
 
     /**
-     * Remove pilot
+     * Remove pilots
      *
-     * @param \AppBundle\Entity\Flight $pilot
+     * @param Flight $pilots
      */
-    public function removePilot(\AppBundle\Entity\Flight $pilot)
+    public function removePilot(Flight $pilots)
     {
-        $this->pilot->removeElement($pilot);
+        $this->pilots->removeElement($pilots);
+    }
+
+
+    /**
+     * Remove passengers
+     *
+     * @param Reservation $passengers
+     */
+    public function removePassengers(Reservation $passengers)
+    {
+        $this->passengers->removeElement($passengers);
     }
 
     /**
-     * Get pilot
+     * Get passengers
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection $passengers
      */
-    public function getPilot()
+    public function getPassengers()
     {
-        return $this->pilot;
-    }
-
-    /**
-     * Add passenger
-     *
-     * @param \AppBundle\Entity\Reservation $passenger
-     *
-     * @return User
-     */
-    public function addPassenger(\AppBundle\Entity\Reservation $passenger)
-    {
-        $this->passenger[] = $passenger;
-
-        return $this;
-    }
-
-    /**
-     * Remove passenger
-     *
-     * @param \AppBundle\Entity\Reservation $passenger
-     */
-    public function removePassenger(\AppBundle\Entity\Reservation $passenger)
-    {
-        $this->passenger->removeElement($passenger);
-    }
-
-    /**
-     * Get passenger
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPassenger()
-    {
-        return $this->passenger;
+        return $this->passengers;
     }
 
     /**
      * Get pilots
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection $passengers
      */
     public function getPilots()
     {
         return $this->pilots;
     }
 
+
     /**
-     * Get passengers
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return mixed
      */
-    public function getPassengers()
+    public function getUserRateds()
     {
-        return $this->passengers;
+        return $this->userRateds;
+    }
+
+    /**
+     * @param mixed $userRateds
+     */
+    public function setUserRateds($userRateds)
+    {
+        $this->userRateds = $userRateds;
     }
 }

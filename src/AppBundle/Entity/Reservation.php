@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Flight;
+use AppBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,11 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Reservation
 {
-    public function __toString()
-    {
-        return "$this->id";
-    }
-
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="passengers")
      * @ORM\JoinColumn(nullable=false)
@@ -59,6 +56,10 @@ class Reservation
      */
     private $wasDone;
 
+    public function __toString()
+    {
+        return "$this->id";
+    }
 
     /**
      * Get id
@@ -145,11 +146,11 @@ class Reservation
     /**
      * Set passenger
      *
-     * @param \AppBundle\Entity\User $passenger
+     * @param User $passenger
      *
      * @return Reservation
      */
-    public function setPassenger(\AppBundle\Entity\User $passenger)
+    public function setPassenger(User $passenger)
     {
         $this->passenger = $passenger;
 
@@ -159,7 +160,7 @@ class Reservation
     /**
      * Get passenger
      *
-     * @return \AppBundle\Entity\User
+     * @return User
      */
     public function getPassenger()
     {
@@ -169,11 +170,11 @@ class Reservation
     /**
      * Set flight
      *
-     * @param \AppBundle\Entity\Flight $flight
+     * @param Flight $flight
      *
      * @return Reservation
      */
-    public function setFlight(\AppBundle\Entity\Flight $flight)
+    public function setFlight(Flight $flight)
     {
         $this->flight = $flight;
 
@@ -183,7 +184,7 @@ class Reservation
     /**
      * Get flight
      *
-     * @return \AppBundle\Entity\Flight
+     * @return Flight $flight
      */
     public function getFlight()
     {

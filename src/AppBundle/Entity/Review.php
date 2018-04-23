@@ -12,16 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Review
 {
-    /*
-     * adding personnal methods, variables
-     */
-    public function __toString()
-    {
-        //return the Site object with "[ICAO] - [NAME] [CITY]" format, when  __toString is called.
-        return "$this->id";
-    }
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userRateds")
      * @ORM\JoinColumn(nullable=false)
      */
     private $userRated;
@@ -63,6 +55,11 @@ class Review
      */
     private $note;
 
+    public function __toString()
+    {
+        //return the Site object with "[ICAO] - [NAME] [CITY]" format, when  __toString is called.
+        return "$this->id";
+    }
 
     /**
      * Get id

@@ -2,6 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Flight;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,8 +16,15 @@ use Doctrine\ORM\Mapping as ORM;
 class PlaneModel
 {
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->plane = new ArrayCollection();
+    }
+
+    /**
      * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -191,22 +201,15 @@ class PlaneModel
     {
         return $this->isAvailable;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->plane = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add plane
      *
-     * @param \AppBundle\Entity\Flight $plane
+     * @param Flight $plane
      *
      * @return PlaneModel
      */
-    public function addPlane(\AppBundle\Entity\Flight $plane)
+    public function addPlane(Flight $plane)
     {
         $this->plane[] = $plane;
 
@@ -216,9 +219,9 @@ class PlaneModel
     /**
      * Remove plane
      *
-     * @param \AppBundle\Entity\Flight $plane
+     * @param Flight $plane
      */
-    public function removePlane(\AppBundle\Entity\Flight $plane)
+    public function removePlane(Flight $plane)
     {
         $this->plane->removeElement($plane);
     }
@@ -226,7 +229,7 @@ class PlaneModel
     /**
      * Get plane
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getPlane()
     {
@@ -236,7 +239,7 @@ class PlaneModel
     /**
      * Get planes
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getPlanes()
     {

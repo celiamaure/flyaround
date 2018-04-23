@@ -2,6 +2,12 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\PlaneModel;
+use AppBundle\Entity\Reservation;
+use AppBundle\Entity\Site;
+use AppBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,15 +18,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Flight
 {
-    /*
-     * adding personnal methods, variables
-     */
-
-
-
-    public function __toString()
+    public function __construct()
     {
-        return $this->departure . " " . $this->arrival;
+        $this->flight = new ArrayCollection();
+        $this->arrival = new ArrayCollection();
+        $this->pilot = new ArrayCollection();
+        $this->departure = new ArrayCollection();
     }
 
     /**
@@ -103,6 +106,10 @@ class Flight
      */
     private $wasDone;
 
+    public function __toString()
+    {
+        return $this->departure . " " . $this->arrival;
+    }
 
     /**
      * Get id
@@ -262,11 +269,11 @@ class Flight
     /**
      * Set departure
      *
-     * @param \AppBundle\Entity\Site $departure
+     * @param Site $departure
      *
      * @return Flight
      */
-    public function setDeparture(\AppBundle\Entity\Site $departure)
+    public function setDeparture(Site $departure)
     {
         $this->departure = $departure;
 
@@ -276,7 +283,7 @@ class Flight
     /**
      * Get departure
      *
-     * @return \AppBundle\Entity\Site
+     * @return Site
      */
     public function getDeparture()
     {
@@ -286,11 +293,11 @@ class Flight
     /**
      * Set arrival
      *
-     * @param \AppBundle\Entity\Site $arrival
+     * @param Site $arrival
      *
      * @return Flight
      */
-    public function setArrival(\AppBundle\Entity\Site $arrival)
+    public function setArrival(Site $arrival)
     {
         $this->arrival = $arrival;
 
@@ -300,7 +307,7 @@ class Flight
     /**
      * Get arrival
      *
-     * @return \AppBundle\Entity\Site
+     * @return Site
      */
     public function getArrival()
     {
@@ -310,11 +317,11 @@ class Flight
     /**
      * Set plane
      *
-     * @param \AppBundle\Entity\PlaneModel $plane
+     * @param PlaneModel $plane
      *
      * @return Flight
      */
-    public function setPlane(\AppBundle\Entity\PlaneModel $plane)
+    public function setPlane(PlaneModel $plane)
     {
         $this->plane = $plane;
 
@@ -324,7 +331,7 @@ class Flight
     /**
      * Get plane
      *
-     * @return \AppBundle\Entity\PlaneModel
+     * @return PlaneModel
      */
     public function getPlane()
     {
@@ -334,11 +341,11 @@ class Flight
     /**
      * Set pilot
      *
-     * @param \AppBundle\Entity\User $pilot
+     * @param User $pilot
      *
      * @return Flight
      */
-    public function setPilot(\AppBundle\Entity\User $pilot)
+    public function setPilot(User $pilot)
     {
         $this->pilot = $pilot;
 
@@ -348,29 +355,21 @@ class Flight
     /**
      * Get pliot
      *
-     * @return \AppBundle\Entity\User
+     * @return User
      */
     public function getPilot()
     {
         return $this->pilot;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->flight = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
 
     /**
      * Add flight
      *
-     * @param \AppBundle\Entity\Reservation $flight
+     * @param Reservation $flight
      *
      * @return Flight
      */
-    public function addFlight(\AppBundle\Entity\Reservation $flight)
+    public function addFlight(Reservation $flight)
     {
         $this->flight[] = $flight;
 
@@ -380,9 +379,9 @@ class Flight
     /**
      * Remove flight
      *
-     * @param \AppBundle\Entity\Reservation $flight
+     * @param Reservation $flight
      */
-    public function removeFlight(\AppBundle\Entity\Reservation $flight)
+    public function removeFlight(Reservation $flight)
     {
         $this->flight->removeElement($flight);
     }
@@ -390,7 +389,7 @@ class Flight
     /**
      * Get flight
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getFlight()
     {
