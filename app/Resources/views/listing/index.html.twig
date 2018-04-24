@@ -1,0 +1,44 @@
+{# app/Ressources/views/default/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>List</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Reservation Number (id)</th>
+            <td>{{ reservation.id }}</td>
+        </tr>
+        <tr>
+            <th>Flight Number (id)</th>
+            <td>{{ flight.id }}</td>
+        </tr>
+        <tr>
+            <th>Flight's departure</th>
+            <td>{{ flight.departure }}</td>
+        </tr>
+        <tr>
+            <th>Flight's arrival</th>
+            <td>{{ flight.departure }}</td>
+        </tr>
+        {% if flight.pilot.isACertifiedPilot == 1 %}
+            <tr>
+                <th>Pilot</th>
+                <td>{{ flight.pilot }}</td>
+            </tr>
+        {% endif %}
+            <tr>
+                <th>Flight's description</th>
+                <td>{{ flight.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="/">Return to homepage</a>
+        </li>
+    </ul>
+{% endblock %}
