@@ -17,7 +17,22 @@
         </thead>
         <tbody>
         {% for review in reviews %}
-
+            <tr>
+                <td><a href="{{ path('review_show', { 'id' : review.id}) }}">{{ review.id }}</a> </td>
+                <td>{{ review.text }}</td>
+                <td>{% if review.publicationDate %}{{ review.publicationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ review.note }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('review_show', {'id' : review.id}) }}">Show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('review_edit', {'id' : review.id}) }}">Edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
         {% endfor %}
         </tbody>
     </table>

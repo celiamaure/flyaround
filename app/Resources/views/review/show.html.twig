@@ -15,15 +15,15 @@
         </tr>
         <tr>
             <th>publication date</th>
-            <td>{{ review.publicationDate }}</td>
+            <td>{% if review.publicationDate %}{{ review.publicationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
         </tr>
         <tr>
             <th>user rated id</th>
-            <td>{{ review.user_rated_id }}</td>
+            <td>{{ review.userRated }}</td>
         </tr>
         <tr>
             <th>review_author_id</th>
-            <td>{{ review.review_author_id }}</td>
+            <td>{{ review.reviewAuthor }}</td>
         </tr>
         </tbody>
     </table>
@@ -33,7 +33,7 @@
             <a href="{{ path('review_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('review_index', { 'id': review.id }) }}">Edit</a>
+            <a href="{{ path('review_edit', { 'id': review.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
