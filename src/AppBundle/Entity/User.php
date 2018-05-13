@@ -2,26 +2,27 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Flight;
-use AppBundle\Entity\Reservation;
-use AppBundle\Entity\Review;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * User
  *
- * @ORM\Table(name="user")
+ * @ORM\Table(name="`user`")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User
+class User extends BaseUser
 {
     /**
      * Constructor
      */
     public function __construct()
     {
+        parent::__construct();
         $this->pilots = new ArrayCollection();
         $this->passengers = new ArrayCollection();
         $this->userRateds = new ArrayCollection();
@@ -52,7 +53,7 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -63,6 +64,7 @@ class User
 
     /**
      * @var string
+     * @Assert\NotBlank(message="Please enter your name.", groups={"Registration", "Profile"})
      *
      * @ORM\Column(name="lastName", type="string", length=32)
      */
