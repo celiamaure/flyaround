@@ -73,8 +73,8 @@ fos_user:
     service:
         mailer: fos_user.mailer.twig_swift
     from_email:
-        address: "%mailer_user%"
-        sender_name: "%mailer_user%"
+        address: 'celiamaure@icloud.com'
+        sender_name: 'Célia'
     registration:
         form:
             type: AppBundle\Form\RegistrationType
