@@ -28,7 +28,6 @@ security:
                 login_path: /login
             logout:       true
             anonymous:    ~
-            form_login:
 
             #activate different ways to authenticate
 
@@ -46,8 +45,8 @@ security:
 
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/planemodel, role: ROLE_USER }
         - { path: ^/reservation, role: ROLE_USER }
         - { path: ^/flight, role: ROLE_USER }
