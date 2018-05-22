@@ -14,9 +14,10 @@ class FlightInfo
      *
      * @param string $unit Defined in config.yml
      */
-    public function __construct($unit)
+    public function __construct($unit, $unit2)
     {
         $this->unit = $unit;
+        $this->unit2 = $unit2;
     }
 
     /**
@@ -39,7 +40,7 @@ class FlightInfo
         $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($latitudeFrom)) * cos(deg2rad($latitudeTo)) * sin($dLon/2) * sin($dLon/2);
         $c = 2 * asin(sqrt($a));
 
-        switch ($this->_unit) {
+        switch ($this->unit) {
             case 'km':
                 $d = $c * $earth_radius;
                 break;
@@ -52,5 +53,25 @@ class FlightInfo
         }
 
         return $d;
+    }
+
+    /**
+     * Duration calculation
+     *
+     * @param float $cruiseSpeed  CruiseSpeed
+     * @param float $distance Distance
+     *
+     * @return float
+     */
+    public function getTime($cruiseSpeed, $distance)
+    {
+        $time = $cruiseSpeed / $distance;
+
+        switch ($this->unit2) {
+            case 'min':
+                $t = $time / 60;
+                break;
+        }
+        return $time;
     }
 }

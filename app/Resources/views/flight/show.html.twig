@@ -37,6 +37,10 @@
                 <th>Distance</th>
                 <td>{% if distance %}{{ distance|number_format(2, ',', ' ') }}{% endif %} {{ unit }}</td>
             </tr>
+            <tr>
+                <th>Durée</th>
+                <td>{% if time %}{{ time|number_format(1, ',', ' ') }}{% endif %} {{ unit2 }}</td>
+            </tr>
         </tbody>
     </table>
 

@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: en
     unit: km
+    unit2: h
 
 framework:
     #esi: ~
@@ -38,6 +39,7 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         unit: '%unit%'
+        unit2: '%unit2%'
 
 # Doctrine Configuration
 doctrine:
