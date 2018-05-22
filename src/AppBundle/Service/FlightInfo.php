@@ -8,16 +8,17 @@ class FlightInfo
      * @var string
      */
     private $unit;
+    private $timeUnit;
 
     /**
      * Constructor
      *
      * @param string $unit Defined in config.yml
      */
-    public function __construct($unit, $unit2)
+    public function __construct($unit, $timeUnit)
     {
         $this->unit = $unit;
-        $this->unit2 = $unit2;
+        $this->timeUnit = $timeUnit;
     }
 
     /**
@@ -67,7 +68,7 @@ class FlightInfo
     {
         $time = $cruiseSpeed / $distance;
 
-        switch ($this->unit2) {
+        switch ($this->timeUnit) {
             case 'min':
                 $t = $time / 60;
                 break;

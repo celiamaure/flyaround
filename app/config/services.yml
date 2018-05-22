@@ -32,4 +32,4 @@ services:
     AppBundle\Service\FlightInfo:
         arguments:
             $unit:    '%unit%'
-            $unit2:    '%unit2%'
+            $timeUnit:    '%timeunit%'

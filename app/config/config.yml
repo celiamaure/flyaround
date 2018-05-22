@@ -8,7 +8,7 @@ imports:
 parameters:
     locale: en
     unit: km
-    unit2: h
+    timeUnit: h
 
 framework:
     #esi: ~
@@ -39,7 +39,7 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         unit: '%unit%'
-        unit2: '%unit2%'
+        timeUnit: '%timeUnit%'
 
 # Doctrine Configuration
 doctrine:
@@ -83,5 +83,3 @@ fos_user:
     registration:
         form:
             type: AppBundle\Form\RegistrationType
-
-
