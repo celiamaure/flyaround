@@ -13,4 +13,6 @@ web_profiler:
     intercept_redirects: false
 
 swiftmailer:
-    disable_delivery: true
+    transport: gmail
+    disable_delivery: false
+    delivery_address: ['celiamaure00@gmail.com']

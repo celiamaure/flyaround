@@ -6,7 +6,8 @@ use AppBundle\Entity\Flight;
 use AppBundle\Service\FlightInfo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Flight controller.
@@ -77,6 +78,7 @@ class FlightController extends Controller
             $distance,
             $flight->getPlane()->getCruiseSpeed()
         );
+
 
         $deleteForm = $this->createDeleteForm($flight);
 

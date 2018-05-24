@@ -18,15 +18,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User extends BaseUser
 {
     /**
-     * Constructor
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->pilots = new ArrayCollection();
-        $this->passengers = new ArrayCollection();
-        $this->userRateds = new ArrayCollection();
-    }
+    protected $id;
 
 
     /**
@@ -45,15 +43,6 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="passenger")
      */
     private $passengers;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
 
     /**
      * @var string
@@ -98,13 +87,24 @@ class User extends BaseUser
      */
     private $note;
 
-
     /**
      * @var bool
      *
      * @ORM\Column(name="isACertifiedPilot", type="boolean")
      */
     private $isACertifiedPilot;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->pilots = new ArrayCollection();
+        $this->passengers = new ArrayCollection();
+        $this->userRateds = new ArrayCollection();
+    }
 
     public function __toString()
     {

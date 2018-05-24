@@ -33,3 +33,6 @@ services:
         arguments:
             $unit:    '%unit%'
             $timeUnit:    '%timeunit%'
+
+    AppBundle\Service\Mailer:
+        class: AppBundle\Service\Mailer
